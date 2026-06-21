@@ -89,6 +89,7 @@ border-radius:14px;
 font-weight:700;
 cursor:pointer;
 min-width:120px;
+text-decoration:none;
 }
 
 .yes{background:var(--yes);color:#3c3e43}
@@ -207,7 +208,7 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <div class="card">
 <h1>Kaip priimate sprendimus? 🤔</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">reitai, kliaujuosi intuicija</button>
+<button class="btn yes" onclick="next()">Greitai, kliaujuosi intuicija</button>
 <button class="btn yes" onclick="next()">Analizuoju, ilgai mąstau logiškai</button>
 </div>
 </div>
@@ -228,7 +229,7 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 5 -->
 <div class="scene">
 <div class="card">
-<h1>AAr mėgstate išbandyti naujus skonius? 🍜</h1>
+<h1>Ar mėgstate išbandyti naujus skonius? 🍜</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Taip, VISADA</button>
 <button class="btn yes" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
@@ -252,7 +253,7 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 7 DATE -->
 <div class="scene">
 <div class="card">
-<h1>Pasirinkite datą, kai galėsite skirti pora valandų dovanai atsiimti 📅 </h1>
+<h1>Pasirinkite artimiausią Jums tinkamą datą ir laiką dovanai panaudoti 📅 </h1>
 <p>Spauskite ant kalendoriaus ir laikrodžio ikonų, kad atsirastų pasirinkimo lentelės</p>
 <input type="date">
 <input type="time">
@@ -277,18 +278,18 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <div class="scene">
 <div class="card">
 <h1>
-Pagal Jūsų asmenybės tipą geriausia dovana yra...<br><br>
+Pagal Jūsų asmenybės tipą geriausia dovana yra...<br>
 Egzotinė vakarienė Vilniuje dviems 🐜
 </h1>
 <div class="intro-text">
-Tai neeilinė gastronominė patirtis, atvykstanti tik vieną kartą į Lietuvą. Rytų virtuvės restoranas kviečia į drąsų, netikėtą ir nepamirštamą potyrį – pažinti ateities gastronomiją per egzotinius skonius.<br><br>
+Tai neeilinė gastronominė patirtis, atvykstanti tik vieną kartą į Lietuvą. Rytų virtuvės restoranas kviečia į drąsų, netikėtą ir nepamirštamą potyrį – pažinti ateities gastronomiją per egzotinius skonius.<br>
 Šios dovanos metu laukia autentiška degustacija, kurioje subtiliai ir profesionaliai paruošti patiekalai atskleidžia netradicinę, tačiau vis labiau pasaulyje vertinamą maisto kryptį. Svečiai turės galimybę paragauti dar gyvų bambukų bei šilkaverpių lervų, kruopščiai paruoštų miltines kandies lervų, svirplių bei kitų egzotinių ingredientų, kurie rytų virtuvėje interpretuojami kaip inovatyvūs, maistingi ir gurmaniški skoniai.  
 </div>
 <img src="https://cdn.corenexis.com/f/iGD8kv71e4G.jpg">
-<h2>Ar išrinkta dovana atitinka Jūsų poreikius ir galime atsiųsti Jums bilietus? 🎁</h2>
+<h2>Ar išrinkta dovana atitinka Jūsų poreikius? 🎁</h2>
 <div class="controls">
 <button class="btn yes" onclick="openFinal()">TAIP</button>
-<button class="btn no" id="noBtn">NE</button>
+<button class="btn no" id="noBtn">Kartoti testą</button>
 </div>
 </div>
 </div>
@@ -296,11 +297,14 @@ Tai neeilinė gastronominė patirtis, atvykstanti tik vieną kartą į Lietuvą.
 <!-- RESULT -->
 <div class="overlay" id="result">
 <div class="modal">
-<h2>✨ Mūsų testai niekada neklysta, o parinktos patirtys visada viršina lūkesčius!</h2>
-<h2>Dovaną įteikia: Su nuoširdžiausiais linkėjimais ir dėkingumu už mūsų bendrą kelią – Neringa 🌷</h2>
+<p>Taip ir galvojome, kad ši dovana Jums patiks! Testais parinktos patirtys visada viršina lūkesčius!</p>
+<h2>
+Dovaną įteikia:<br>
+Su nuoširdžiausiais linkėjimais ir dėkingumu už mūsų bendrą kelią – Neringa 🌷
+</h2>
 <a class="btn yes"
 href="tickets-6a342e9b334140.49859372.pdf"
-target="_blank">🎫 Bilietai</a>
+target="_blank">Bilietai</a>
 
 <br><br>
 
