@@ -35,7 +35,6 @@ position:fixed;
 top:0;left:0;right:0;
 height:4px;
 background:#1f2937;
-z-index:1000;
 }
 .bar{
 height:100%;
@@ -74,7 +73,6 @@ margin-top:18px;
 justify-content:center;
 align-items:center;
 flex-wrap:wrap;
-position:relative;
 }
 
 .btn{
@@ -89,11 +87,6 @@ min-width:120px;
 .yes{background:var(--yes);color:#fff}
 .no{background:var(--no);color:#fff}
 
-/* runaway NO */
-.no-run{
-position:relative;
-}
-
 /* input */
 input{
 width:100%;
@@ -101,14 +94,14 @@ padding:12px;
 margin-top:10px;
 border-radius:12px;
 border:1px solid #333;
-background:#bfb7a8;
-color:#fff;
+background:#f3e6d3;
+color:#000;
 }
 
 /* intro */
 .intro-text{
 font-size:20px;
-line-height:1.6;
+line-height:1.7;
 color:#3c3e43;
 text-align:justify;
 max-height:60vh;
@@ -116,14 +109,14 @@ overflow-y:auto;
 padding-right:12px;
 }
 
-/* overlay */
+/* overlay loading */
 .overlay{
 position:fixed;
 inset:0;
 display:none;
 place-items:center;
 background:rgba(0,0,0,.75);
-z-index:2000;
+z-index:9999;
 }
 
 .modal{
@@ -155,18 +148,21 @@ to{transform:rotate(360deg)}
 
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<!-- 0 -->
+<!-- 0 INTRO -->
 <div class="scene active">
 <div class="card">
 <h1>Miela Dalyte,</h1>
+
 <div class="intro-text">
 gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
 
-Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami.<br><br>
+Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni.<br><br>
 
-Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją.<br><br>
+Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
 
-O šiai progai – testas 🌷
+Linkiu Jums sveikatos, ramybės, artimųjų meilės ir gražių akimirkų.<br><br>
+
+O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną 🌷
 </div>
 
 <div class="controls">
@@ -246,7 +242,7 @@ O šiai progai – testas 🌷
 </div>
 </div>
 
-<!-- 7 (DATE) -->
+<!-- 7 DATE (PASKUTINIS KLAUSIMAS) -->
 <div class="scene">
 <div class="card">
 <h1>Pasirinkite datą 📅</h1>
@@ -255,12 +251,12 @@ O šiai progai – testas 🌷
 <input type="time">
 
 <div class="controls">
-<button class="btn yes" onclick="next()">Tęsti</button>
+<button class="btn yes" onclick="showLoading()">Tęsti</button>
 </div>
 </div>
 </div>
 
-<!-- LOADING (NE scene step logikoje) -->
+<!-- LOADING OVERLAY -->
 <div class="overlay" id="loadingOverlay">
 <div class="modal">
 <h1>🔍 Tikrinami atsakymai...</h1>
@@ -276,7 +272,7 @@ O šiai progai – testas 🌷
 
 <div class="controls">
 <button class="btn yes" onclick="openFinal()">TAIP</button>
-<button class="btn no no-run" id="noFinal">NE</button>
+<button class="btn no">NE</button>
 </div>
 </div>
 </div>
@@ -312,13 +308,6 @@ bar.style.width = (step / (scenes.length - 1)) * 100 + "%";
 }
 
 function next(){
-
-// DATE -> LOADING
-if(step === 6){
-showLoading();
-return;
-}
-
 if(step < scenes.length - 1){
 step++;
 update();
@@ -326,12 +315,11 @@ update();
 }
 
 function showLoading(){
-
 loadingOverlay.style.display = "grid";
 
 setTimeout(()=>{
 loadingOverlay.style.display = "none";
-step = 7;
+step = 8;
 update();
 }, 3000);
 }
@@ -339,14 +327,6 @@ update();
 function openFinal(){
 document.getElementById("overlay").style.display = "grid";
 }
-
-const noFinal = document.getElementById("noFinal");
-
-noFinal.addEventListener("mouseenter",()=>{
-noFinal.style.position = "fixed";
-noFinal.style.left = Math.random() * 80 + "vw";
-noFinal.style.top = Math.random() * 80 + "vh";
-});
 
 function restart(){
 step = 0;
