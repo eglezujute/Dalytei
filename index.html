@@ -106,13 +106,24 @@ color:#fff;
 }
 
 .intro-text{
-font-size:16px;
-line-height:1.8;
+font-size:18px;              /* didesnis tekstas */
+line-height:1.9;
 color:#e5e7eb;
-text-align:left;
+
+/* 💡 ABIPUSĖ LYGIUOTĖ */
+text-align:justify;
+
+/* kad paskutinė eilutė nebūtų ištempta */
+text-justify:inter-word;
+
+/* scroll efektas */
 max-height:60vh;
-overflow:auto;
-padding-align:10px;
+overflow-y:auto;
+padding-right:12px;
+
+/* gražesnė skaitymo zona */
+scrollbar-width:thin;
+scrollbar-color:#22c55e rgba(0,0,0,0.2);
 }
 
 /* overlay */
@@ -320,38 +331,25 @@ target="_blank">
 </div>
 
 <script>
-
-let step=0;
-const scenes=document.querySelectorAll(".scene");
-const bar=document.getElementById("bar");
+  
+let step = 0;
+const scenes = document.querySelectorAll(".scene");
+const bar = document.getElementById("bar");
 
 function update(){
 scenes.forEach((s,i)=>{
-s.classList.toggle("active",i===step);
+s.classList.toggle("active", i === step);
 });
 
-bar.style.width=(step/6)*100+"%";
-}
-
-function showLoading(){
-step = 5; // loading ekranas
-update();
-
-setTimeout(() => {
-step = 6; // final ekranas
-update();
-}, 5000);
+bar.style.width = (step / (scenes.length - 1)) * 100 + "%";
 }
 
 function next(){
 
+// loading trigger
 if(step === 4){
 showLoading();
 return;
-}
-
-step++;
-update();
 }
 
 if(step < scenes.length - 1){
@@ -360,32 +358,36 @@ update();
 }
 }
 
-function openFinal(){
-document.getElementById("overlay").style.display="grid";
+function showLoading(){
+step = 5;
+update();
+
+setTimeout(()=>{
+step = 6;
+update();
+}, 5000);
 }
 
-/* runaway FINAL ONLY */
-const noFinal=document.getElementById("noFinal");
+function openFinal(){
+document.getElementById("overlay").style.display = "grid";
+}
+
+const noFinal = document.getElementById("noFinal");
 
 noFinal.addEventListener("mouseenter",()=>{
-noFinal.style.position="fixed";
-noFinal.style.left=Math.random()*80+"vw";
-noFinal.style.top=Math.random()*80+"vh";
+noFinal.style.position = "fixed";
+noFinal.style.left = Math.random() * 80 + "vw";
+noFinal.style.top = Math.random() * 80 + "vh";
 });
 
-/* restart */
 function restart(){
-step=0;
+step = 0;
 update();
-document.getElementById("overlay").style.display="none";
+document.getElementById("overlay").style.display = "none";
 
-/* reset NO button */
-noFinal.style.position="relative";
-noFinal.style.left="";
-noFinal.style.top="";
-
-/* force reflow (svarbu kai kuriems browseriams) */
-noFinal.offsetHeight;
+noFinal.style.position = "relative";
+noFinal.style.left = "";
+noFinal.style.top = "";
 }
 
 update();
