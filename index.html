@@ -10,7 +10,6 @@
 --bg:#ffc37c;
 --card:rgba(255, 159, 78, 0.95);
 --text:#3c3e43;
---muted:#ffffff;
 --yes:#22c55e;
 --no:#ef4444;
 }
@@ -71,7 +70,6 @@ display:flex;
 gap:12px;
 margin-top:18px;
 justify-content:center;
-align-items:center;
 flex-wrap:wrap;
 }
 
@@ -87,6 +85,16 @@ min-width:120px;
 .yes{background:var(--yes);color:#fff}
 .no{background:var(--no);color:#fff}
 
+/* intro */
+.intro-text{
+font-size:20px;
+line-height:1.6;
+text-align:justify;
+max-height:60vh;
+overflow-y:auto;
+padding-right:10px;
+}
+
 /* input */
 input{
 width:100%;
@@ -95,21 +103,9 @@ margin-top:10px;
 border-radius:12px;
 border:1px solid #333;
 background:#f3e6d3;
-color:#000;
 }
 
-/* intro */
-.intro-text{
-font-size:20px;
-line-height:1.7;
-color:#3c3e43;
-text-align:justify;
-max-height:60vh;
-overflow-y:auto;
-padding-right:12px;
-}
-
-/* overlay loading */
+/* overlay */
 .overlay{
 position:fixed;
 inset:0;
@@ -141,6 +137,13 @@ animation:spin 1s linear infinite;
 @keyframes spin{
 to{transform:rotate(360deg)}
 }
+
+/* runaway NO */
+.no-run{
+position:fixed;
+left:55%;
+top:65%;
+}
 </style>
 </head>
 
@@ -154,15 +157,11 @@ to{transform:rotate(360deg)}
 <h1>Miela Dalyte,</h1>
 
 <div class="intro-text">
-gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
+gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas.<br><br>
 
-Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni.<br><br>
+Ačiū Jums už išmintį, bendrumą ir šilumą.<br><br>
 
-Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
-
-Linkiu Jums sveikatos, ramybės, artimųjų meilės ir gražių akimirkų.<br><br>
-
-O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną 🌷
+O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
 </div>
 
 <div class="controls">
@@ -176,8 +175,8 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 <div class="card">
 <h1>Kaip dažniausiai leidžiate laisvalaikį?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Aktyviai – renginiai, kelionės</button>
-<button class="btn yes" onclick="next()">Ramiai – knyga, filmai</button>
+<button class="btn yes" onclick="next()">Aktyviai</button>
+<button class="btn yes" onclick="next()">Ramiai</button>
 <button class="btn yes" onclick="next()">Mišriai</button>
 </div>
 </div>
@@ -186,7 +185,7 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 <!-- 2 -->
 <div class="scene">
 <div class="card">
-<h1>Kas Jums svarbiausia patirtyse?</h1>
+<h1>Kas Jums svarbiausia?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Nauji įspūdžiai</button>
 <button class="btn yes" onclick="next()">Ramybė</button>
@@ -209,11 +208,11 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 <!-- 4 -->
 <div class="scene">
 <div class="card">
-<h1>Kaip reaguojate į staigmenas?</h1>
+<h1>Staigmenos?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Labai patinka</button>
+<button class="btn yes" onclick="next()">Patinka</button>
 <button class="btn yes" onclick="next()">Kartais</button>
-<button class="btn yes" onclick="next()">Ne patinka</button>
+<button class="btn yes" onclick="next()">Ne</button>
 </div>
 </div>
 </div>
@@ -233,7 +232,7 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 <!-- 6 -->
 <div class="scene">
 <div class="card">
-<h1>Ar svarbi pateikimo estetika?</h1>
+<h1>Ar svarbi estetika?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Labai</button>
 <button class="btn yes" onclick="next()">Ne visada</button>
@@ -242,7 +241,7 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 </div>
 </div>
 
-<!-- 7 DATE (PASKUTINIS KLAUSIMAS) -->
+<!-- 7 DATE -->
 <div class="scene">
 <div class="card">
 <h1>Pasirinkite datą 📅</h1>
@@ -256,8 +255,8 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 </div>
 </div>
 
-<!-- LOADING OVERLAY -->
-<div class="overlay" id="loadingOverlay">
+<!-- LOADING -->
+<div class="overlay" id="loading">
 <div class="modal">
 <h1>🔍 Tikrinami atsakymai...</h1>
 <div class="loader"></div>
@@ -268,17 +267,16 @@ O šiai progai kviečiu atlikti testą, kuris parinks Jums tinkamiausią dovaną
 <div class="scene">
 <div class="card">
 <h1>🎉 Jūsų dovana parinkta</h1>
-<p>Egzotinė degustacinė vakarienė</p>
 
 <div class="controls">
 <button class="btn yes" onclick="openFinal()">TAIP</button>
-<button class="btn no">NE</button>
+<button class="btn no" id="noBtn">NE</button>
 </div>
 </div>
 </div>
 
 <!-- RESULT -->
-<div class="overlay" id="overlay">
+<div class="overlay" id="result">
 <div class="modal">
 <h2>✨ Taip ir manėme!</h2>
 
@@ -297,14 +295,14 @@ target="_blank">🎫 Bilietai</a>
 let step = 0;
 const scenes = document.querySelectorAll(".scene");
 const bar = document.getElementById("bar");
-const loadingOverlay = document.getElementById("loadingOverlay");
+const loading = document.getElementById("loading");
 
 function update(){
 scenes.forEach((s,i)=>{
 s.classList.toggle("active", i === step);
 });
 
-bar.style.width = (step / (scenes.length - 1)) * 100 + "%";
+bar.style.width = (step/(scenes.length-1))*100 + "%";
 }
 
 function next(){
@@ -315,23 +313,42 @@ update();
 }
 
 function showLoading(){
-loadingOverlay.style.display = "grid";
+loading.style.display = "grid";
 
 setTimeout(()=>{
-loadingOverlay.style.display = "none";
-step = 8;
+loading.style.display = "none";
+step = scenes.length - 1;
 update();
 }, 3000);
 }
 
+/* FINAL NO BUTTON */
+const noBtn = document.getElementById("noBtn");
+
+function moveNo(){
+noBtn.style.position = "fixed";
+noBtn.style.left = Math.random()*(window.innerWidth-120)+"px";
+noBtn.style.top = Math.random()*(window.innerHeight-60)+"px";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("touchstart",(e)=>{
+e.preventDefault();
+moveNo();
+});
+
 function openFinal(){
-document.getElementById("overlay").style.display = "grid";
+document.getElementById("result").style.display="grid";
 }
 
 function restart(){
 step = 0;
 update();
-document.getElementById("overlay").style.display = "none";
+document.getElementById("result").style.display="none";
+noBtn.style.position="relative";
+noBtn.style.left="";
+noBtn.style.top="";
 }
 
 update();
