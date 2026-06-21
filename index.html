@@ -8,7 +8,7 @@
 <style>
 :root{
 --bg:#0b0f1a;
---card:rgba(17,24,39,.9);
+--card:rgba(17,24,39,.95);
 --text:#fff;
 --muted:#a1a1aa;
 --yes:#22c55e;
@@ -22,7 +22,13 @@ margin:0;
 font-family:system-ui;
 background:var(--bg);
 color:var(--text);
+height:100vh;
 overflow:hidden;
+
+/* VISADA CENTRAS */
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 /* PROGRESS */
@@ -36,45 +42,37 @@ background:#1f2937;
 height:100%;
 width:0%;
 background:linear-gradient(90deg,#22c55e,#3b82f6);
-transition:.4s;
+transition:.3s;
 }
 
-/* STEP SYSTEM (NO SLIDER) */
+/* STEP WRAPPER */
 .scene{
-position:absolute;
-inset:0;
-display:flex;
-align-items:center;
+display:none;
+width:100%;
 justify-content:center;
-padding:40px;
-
-opacity:0;
-transform:scale(0.98);
-pointer-events:none;
-
-transition: .5s ease;
+align-items:center;
 }
 
 .scene.active{
-opacity:1;
-transform:scale(1);
-pointer-events:auto;
-}
-
-/* CENTER FIX */
-.inner{
-width:100%;
-max-width:760px;
-text-align:center;
+display:flex;
 }
 
 /* CARD */
 .card{
+width:min(760px,92vw);
 background:var(--card);
-backdrop-filter:blur(12px);
 padding:32px;
 border-radius:24px;
 box-shadow:0 40px 120px rgba(0,0,0,.6);
+text-align:center;
+
+/* tik čia leidžiam fade */
+animation:fade .25s ease;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
 }
 
 h1{font-size:22px;line-height:1.5}
@@ -85,8 +83,8 @@ p{color:var(--muted);line-height:1.6}
 display:flex;
 gap:12px;
 margin-top:18px;
-flex-wrap:wrap;
 justify-content:center;
+flex-wrap:wrap;
 position:relative;
 }
 
@@ -101,12 +99,12 @@ cursor:pointer;
 .yes{background:var(--yes);color:#fff}
 .no{background:var(--no);color:#fff}
 
-/* FINAL runaway NO */
+/* FINAL RUNAWAY */
 .no-run{
 position:fixed;
 left:50%;
 top:60%;
-transition:.2s;
+transition:.15s;
 }
 
 /* INPUT FIX */
@@ -134,6 +132,7 @@ background:#111827;
 padding:26px;
 border-radius:20px;
 width:min(700px,92vw);
+text-align:center;
 }
 
 </style>
@@ -143,25 +142,19 @@ width:min(700px,92vw);
 
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<!-- 0 INTRO -->
+<!-- 0 -->
 <div class="scene active">
-<div class="inner">
 <div class="card">
-<h1>
-Miela Dalyte,<br><br>
-Trumpas testas parinks Jums dovaną 🌷
-</h1>
-
+<h1>Miela Dalyte 🌷</h1>
+<p>Trumpas testas parinks Jums dovaną.</p>
 <div class="controls">
 <button class="btn yes" onclick="next()">Pradėti</button>
-</div>
 </div>
 </div>
 </div>
 
 <!-- 1 -->
 <div class="scene">
-<div class="inner">
 <div class="card">
 <h1>Koks Jūs esate žmogus?</h1>
 <div class="controls">
@@ -171,11 +164,9 @@ Trumpas testas parinks Jums dovaną 🌷
 </div>
 </div>
 </div>
-</div>
 
 <!-- 2 -->
 <div class="scene">
-<div class="inner">
 <div class="card">
 <h1>Kas Jums svarbiausia?</h1>
 <div class="controls">
@@ -185,11 +176,9 @@ Trumpas testas parinks Jums dovaną 🌷
 </div>
 </div>
 </div>
-</div>
 
 <!-- 3 -->
 <div class="scene">
-<div class="inner">
 <div class="card">
 <h1>Pasirinkite datą 📅</h1>
 
@@ -201,11 +190,9 @@ Trumpas testas parinks Jums dovaną 🌷
 </div>
 </div>
 </div>
-</div>
 
 <!-- 4 -->
 <div class="scene">
-<div class="inner">
 <div class="card">
 <h1>Ar mėgstate egzotinius skonius?</h1>
 <div class="controls">
@@ -214,25 +201,19 @@ Trumpas testas parinks Jums dovaną 🌷
 </div>
 </div>
 </div>
-</div>
 
 <!-- 5 FINAL -->
 <div class="scene">
-<div class="inner">
 <div class="card">
 <h1>🎉 Jūsų dovana parinkta</h1>
 
-<p>
-Egzotinė degustacinė vakarienė su kulinariniu šou.
-</p>
+<p>Egzotinė degustacinė vakarienė su kulinariniu šou.</p>
 
 <p><b>Ar tai atitinka Jūsų norus?</b></p>
 
 <div class="controls">
 <button class="btn yes" onclick="openFinal()">TAIP</button>
 <button class="btn no no-run" id="noFinal">NE</button>
-</div>
-
 </div>
 </div>
 </div>
