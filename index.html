@@ -105,6 +105,15 @@ background:#e5d9c5;
 color:#fff;
 }
 
+.intro-text{
+animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
+}
+
 /* overlay */
 .overlay{
 position:fixed;
@@ -122,6 +131,20 @@ width:min(700px,92vw);
 text-align:center;
 }
 
+.loader{
+margin:20px auto;
+width:50px;
+height:50px;
+border:4px solid #2a2f3a;
+border-top:4px solid #22c55e;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
 </style>
 </head>
 
@@ -133,8 +156,9 @@ text-align:center;
 <div class="scene active">
 <div class="card">
 <h1>
-Miela Dalyte,<br><br>
-
+Miela Dalyte,
+</h1>
+<div class="intro-text">
 gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
 
 Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami. Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
@@ -142,7 +166,7 @@ Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir u�
 Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją, įkvepiančias patirtis ir kuo daugiau laiko tam, kas iš tiesų teikia džiaugsmą. Tegul net ir kasdienybės skubėjime nepritrūksta progų sustoti, pasimėgauti akimirka ir pasijusti laiminga.<br><br>
 
 O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums tinkamą dovaną pagal Jūsų asmenybės tipą 🌷
-</h1>
+</div>
 
 <div class="controls">
 <button class="btn yes" onclick="next()">Atlikti testą</button>
@@ -153,11 +177,11 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 1 -->
 <div class="scene">
 <div class="card">
-<h1>Koks Jūs esate žmogus?</h1>
+<h1>Kaip dažniausiai leidžiate laisvalaikį?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Energinga</button>
-<button class="btn yes" onclick="next()">Rami</button>
-<button class="btn yes" onclick="next()">Iššūkių mėgėja</button>
+<button class="btn yes" onclick="next()">Aktyviai – renginiai, kelionės, naujos vietos</button>
+<button class="btn yes" onclick="next()">Ramiai – knyga, filmai, namų aplinka</button>
+<button class="btn yes" onclick="next()">Mišriai – priklauso nuo nuotaikos</button>
 </div>
 </div>
 </div>
@@ -165,11 +189,11 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 2 -->
 <div class="scene">
 <div class="card">
-<h1>Kas Jums svarbiausia?</h1>
+<h1>Kas Jums svarbiausia patirtyse?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Patirtys</button>
-<button class="btn yes" onclick="next()">Ramybė</button>
-<button class="btn yes" onclick="next()">Netikėtumai</button>
+<button class="btn yes" onclick="next()">Nauji įspūdžiai</button>
+<button class="btn yes" onclick="next()">Ramybė, kokybė, estetika</button>
+<button class="btn yes" onclick="next()">Netikėtumo faktorius</button>
 </div>
 </div>
 </div>
@@ -177,7 +201,54 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 3 -->
 <div class="scene">
 <div class="card">
-<h1>Pasirinkite datą 📅</h1>
+<h1>Kaip priimate sprendimus?</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Greitai, kliaujuosi intuicija</button>
+<button class="btn yes" onclick="next()">Analizuoju logiškai</button>
+</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="scene">
+<div class="card">
+<h1>Kaip reaguojate į staigmenas?</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Labai patinka</button>
+<button class="btn yes" onclick="next()">Patinka, jei gerai apgalvotos</button>
+<button class="btn yes" onclick="next()">Staigmenos ne man</button>
+</div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="scene">
+<div class="card">
+<h1>Ar mėgstate išbandyti naujus skonius?</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Taip, VISADA</button>
+<button class="btn no" onclick="next()">Kartais</button>
+<button class="btn no" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
+</div>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="scene">
+<div class="card">
+<h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Labai svarbu</button>
+<button class="btn no" onclick="next()">Ne visada</button>
+<button class="btn no" onclick="next()">Gali būti pateikiama bet kaip</button>
+</div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="scene">
+<div class="card">
+<h1>Pasirinkite datą, kai galėsite skirti pora valandų dovanai atsiimti 📅</h1>
 <input type="date">
 <input type="time">
 <div class="controls">
@@ -186,16 +257,25 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 </div>
 </div>
 
-<!-- 4 -->
+<!-- 8 -->
 <div class="scene">
 <div class="card">
-<h1>Ar mėgstate egzotinius skonius?</h1>
-
+<h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Taip</button>
-<button class="btn no" onclick="next()">Ne</button>
+<button class="btn yes" onclick="next()">Labai svarbu</button>
+<button class="btn no" onclick="next()">Ne visada</button>
+<button class="btn no" onclick="next()">Gali būti pateikiama bet kaip</button>
+</div>
+</div>
 </div>
 
+<!-- LOADING -->
+<div class="scene" id="loadingScene">
+<div class="card">
+<h1>🔍 Tikrinami Jūsų rezultatai</h1>
+<p>Tikrinami atsakymai ir ieškoma geriausia dovana...</p>
+
+<div class="loader"></div>
 </div>
 </div>
 
@@ -248,11 +328,26 @@ function update(){
 scenes.forEach((s,i)=>{
 s.classList.toggle("active",i===step);
 });
-bar.style.width=(step/(scenes.length-1))*100+"%";
+
+bar.style.width=(step/6)*100+"%";
 }
 
 function next(){
-if(step<scenes.length-1){
+
+// jei einam iš paskutinio klausimo į loading
+if(step === 4){
+step++;
+update(); // parodo loading ekraną
+
+setTimeout(()=>{
+step++; // final scene
+update();
+}, 5000);
+
+return;
+}
+
+if(step < scenes.length - 1){
 step++;
 update();
 }
