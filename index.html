@@ -106,12 +106,13 @@ color:#fff;
 }
 
 .intro-text{
-animation:fadeIn 1s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(10px)}
-to{opacity:1;transform:translateY(0)}
+font-size:16px;
+line-height:1.8;
+color:#e5e7eb;
+text-align:left;
+max-height:60vh;
+overflow:auto;
+padding-align:10px;
 }
 
 /* overlay */
@@ -138,7 +139,7 @@ height:50px;
 border:4px solid #2a2f3a;
 border-top:4px solid #22c55e;
 border-radius:50%;
-animation:spin 1s linear infinite;
+animation:spin 1s linear;
 }
 
 @keyframes spin{
@@ -227,8 +228,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <h1>Ar mėgstate išbandyti naujus skonius?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Taip, VISADA</button>
-<button class="btn no" onclick="next()">Kartais</button>
-<button class="btn no" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
+<button class="btn yes" onclick="next()">Kartais</button>
+<button class="btn yes" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
 </div>
 </div>
 </div>
@@ -239,8 +240,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Labai svarbu</button>
-<button class="btn no" onclick="next()">Ne visada</button>
-<button class="btn no" onclick="next()">Gali būti pateikiama bet kaip</button>
+<button class="btn yes" onclick="next()">Ne visada</button>
+<button class="btn yes" onclick="next()">Gali būti pateikiama bet kaip</button>
 </div>
 </div>
 </div>
@@ -263,8 +264,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Labai svarbu</button>
-<button class="btn no" onclick="next()">Ne visada</button>
-<button class="btn no" onclick="next()">Gali būti pateikiama bet kaip</button>
+<button class="btn yes" onclick="next()">Ne visada</button>
+<button class="btn yes" onclick="next()">Gali būti pateikiama bet kaip</button>
 </div>
 </div>
 </div>
@@ -332,19 +333,25 @@ s.classList.toggle("active",i===step);
 bar.style.width=(step/6)*100+"%";
 }
 
-function next(){
+function showLoading(){
+step = 5; // loading ekranas
+update();
 
-// jei einam iš paskutinio klausimo į loading
-if(step === 4){
-step++;
-update(); // parodo loading ekraną
-
-setTimeout(()=>{
-step++; // final scene
+setTimeout(() => {
+step = 6; // final ekranas
 update();
 }, 5000);
+}
 
+function next(){
+
+if(step === 4){
+showLoading();
 return;
+}
+
+step++;
+update();
 }
 
 if(step < scenes.length - 1){
