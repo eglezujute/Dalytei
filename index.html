@@ -3,230 +3,313 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Su gimtadieniu, Dalyte! 🌷</title>
+<title>Dovanos testas 🌷</title>
+
 <style>
 :root{
---bg1:#fff7fb;--bg2:#f2f6ff;--card:#ffffffcc;--text:#1f2330;--muted:#5b6275;
---yes:#22c55e;--no:#ef4444;--shadow:0 18px 45px rgba(31,35,48,.12);--radius:22px;
+--bg:#0b0f1a;
+--card:rgba(17,24,39,.85);
+--text:#fff;
+--muted:#a1a1aa;
+--yes:#22c55e;
+--no:#ef4444;
 }
+
 *{box-sizing:border-box}
+
 body{
-margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-color:var(--text);min-height:100vh;display:grid;place-items:center;
-background:
-radial-gradient(1000px 700px at 20% 10%, var(--bg1), transparent 60%),
-radial-gradient(900px 650px at 85% 30%, var(--bg2), transparent 60%),
-linear-gradient(180deg,#ffffff,#f8fafc);
+margin:0;
+font-family:system-ui;
+background:var(--bg);
+overflow:hidden;
+color:var(--text);
 }
-.wrap{width:min(820px,92vw);padding:24px}
+
+/* progress */
+.progress{
+position:fixed;
+top:0;left:0;right:0;
+height:4px;
+background:#1f2937;
+z-index:10;
+}
+.bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+transition:.5s;
+}
+
+/* wrapper */
+.wrapper{
+display:flex;
+width:500vw;
+height:100vh;
+transition:transform .9s cubic-bezier(.77,0,.18,1);
+}
+
+/* scenes */
+.scene{
+width:100vw;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+opacity:.6;
+filter:blur(6px);
+transform:scale(.98);
+transition:.8s;
+}
+
+.scene.active{
+opacity:1;
+filter:blur(0);
+transform:scale(1);
+}
+
 .card{
-background:var(--card);backdrop-filter:blur(10px);
-border:1px solid rgba(31,35,48,.08);border-radius:var(--radius);
-box-shadow:var(--shadow);padding:28px;
+width:min(750px,92vw);
+background:var(--card);
+backdrop-filter:blur(12px);
+padding:32px;
+border-radius:24px;
+box-shadow:0 40px 120px rgba(0,0,0,.6);
+animation:fade .6s ease;
 }
-h1{white-space:pre-line;line-height:1.4}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+h1{font-size:22px;line-height:1.5}
 p{color:var(--muted);line-height:1.6}
-.stage{
-margin-top:18px;height:240px;border-radius:18px;
-border:1px dashed rgba(31,35,48,.14);background:rgba(255,255,255,.55);
-position:relative;overflow:hidden;
+
+/* buttons */
+.controls{
+display:flex;
+gap:12px;
+margin-top:18px;
+flex-wrap:wrap;
+position:relative;
 }
+
 .btn{
-border:0;padding:14px 18px;border-radius:16px;font-weight:700;
-cursor:pointer;font-size:16px;
+border:0;
+padding:14px 18px;
+border-radius:14px;
+font-weight:700;
+cursor:pointer;
 }
+
 .yes{background:var(--yes);color:#fff}
-.no{background:var(--no);color:#fff;position:absolute;left:56%;top:56%}
-.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.hint{font-size:13px}
-.chip{
-display:inline-flex;padding:8px 12px;border-radius:999px;
-border:1px solid rgba(31,35,48,.10);background:rgba(255,255,255,.65);
-font-size:13px;
+
+.no{
+background:var(--no);
+color:#fff;
 }
+
+/* only FINAL stage runaway */
+.no-run{
+position:fixed;
+left:50%;
+top:60%;
+transition:.2s;
+}
+
+/* inputs FIXED */
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:12px;
+border:1px solid #333;
+background:#0f172a;
+color:#fff;
+}
+
+/* overlay */
 .overlay{
-position:fixed;inset:0;background:rgba(10,12,18,.35);
-display:none;place-items:center;padding:20px;
+position:fixed;
+inset:0;
+display:none;
+place-items:center;
+background:rgba(0,0,0,.75);
 }
+
 .modal{
-width:min(700px,95vw);max-height:90vh;overflow:auto;
-background:#fff;border-radius:24px;padding:26px;
+background:#111827;
+padding:26px;
+border-radius:20px;
+width:min(700px,92vw);
 }
-.row{display:flex;gap:12px;flex-wrap:wrap}
-.biglink{
-display:inline-flex;text-decoration:none;padding:14px 18px;
-border-radius:16px;background:#111827;color:white;font-weight:800;
-}
-.ghost{border:1px solid rgba(17,24,39,.18);background:white}
-.confetti{position:absolute;inset:-20px;pointer-events:none}
-.confetti i{
-position:absolute;width:10px;height:14px;border-radius:3px;
-animation:fall 1200ms linear forwards;
-}
-@keyframes fall{
-to{transform:translateY(520px) rotate(360deg)}
-}
-footer{margin-top:14px;text-align:center;font-size:12px}
+
 </style>
 </head>
+
 <body>
-<div class="wrap">
+
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div class="wrapper" id="wrapper">
+
+<!-- 0 INTRO -->
+<div class="scene active">
 <div class="card">
-
-<div class="chip">🌷 Miela Dalyte, šiandien Jūsų diena!</div>
-
 <h1>
-Mes ilgai galvojome, kokia dovana galėtų būti verta Jūsų.
+Miela Dalyte,<br><br>
 
-Kažkas išskirtinio.
-Kažkas, ko kasdien nepatirsi.
-Kažkas, apie ką dar ilgai pasakosite kolegoms.
+Gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
 
-Tik vienam vakarui į Lietuvą atvykstanti
-egzotinių gyvių degustacinė vakarienė.
+Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami.<br><br>
 
-Unikalūs skoniai.
-Netikėti ingredientai.
-Judantys eksponatai.
+Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
 
-Kai kurie vakarienės dalyviai dar prieš kelias valandas buvo visiškai gyvi.
+Linkiu Jums sveikatos, harmonijos, artimųjų meilės ir laimės akimirkų.<br><br>
 
-🦂 🦗 🐛
-
-Ar priimsite šią nepamirštamą dovaną?
+O dabar – trumpas testas, kuris parinks Jums asmeniškai pritaikytą dovaną 🌷
 </h1>
 
-<p id="subtitle">
-„NE“ mygtukas sužinojo vakarienės meniu ir dabar paniškai bando išsigelbėti 😄
-</p>
+<div class="controls">
+<button class="btn yes" onclick="next()">Pradėti testą</button>
+</div>
+</div>
+</div>
+
+<!-- 1 -->
+<div class="scene">
+<div class="card">
+<h1>Koks Jūs esate žmogus?</h1>
+<p>Pasirinkite labiausiai tinkantį variantą.</p>
 
 <div class="controls">
-<button class="btn yes" id="yesBtn">TAIP</button>
-<span class="hint" id="statusHint">O gal vis dėlto NE? 🤔</span>
+<button class="btn yes" onclick="next()">Energinga</button>
+<button class="btn yes" onclick="next()">Rami</button>
+<button class="btn yes" onclick="next()">Mėgstanti iššūkius</button>
 </div>
-
-<div class="stage" id="stage">
-<button class="btn no" id="noBtn">NE</button>
-</div>
-
-<footer>Su nuoširdžiausiais linkėjimais 🌷</footer>
-
 </div>
 </div>
 
-<div class="overlay" id="overlay">
-<div class="modal">
-<div class="confetti" id="confetti"></div>
-<h2>🎉 Pasirodo, egzotinių gyvių vakarienės šiandien išvengėte!</h2>
+<!-- 2 -->
+<div class="scene">
+<div class="card">
+<h1>Kas Jums svarbiau kasdienybėje?</h1>
+
+<div class="controls">
+<button class="btn yes" onclick="next()">Naujos patirtys</button>
+<button class="btn yes" onclick="next()">Ramybė</button>
+<button class="btn yes" onclick="next()">Netikėtumai</button>
+</div>
+</div>
+</div>
+
+<!-- 3 DATE -->
+<div class="scene">
+<div class="card">
+<h1>Pasirinkite Jums tinkamą laiką 📅</h1>
+
+<input type="date">
+<input type="time">
+
+<div class="controls">
+<button class="btn yes" onclick="next()">Tęsti</button>
+</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="scene">
+<div class="card">
+<h1>Ar mėgstate egzotinius skonius? 🌶️</h1>
+
+<div class="controls">
+<button class="btn yes" onclick="next()">Taip</button>
+<button class="btn yes" onclick="next()">Kartais</button>
+</div>
+</div>
+</div>
+
+<!-- 5 FINAL -->
+<div class="scene">
+<div class="card">
+<h1>🎉 Jūsų dovana parinkta</h1>
+
 <p>
-Tikroji dovana laukia žemiau. Linkime gražaus vakaro ir daug įspūdžių!
+Pagal Jūsų atsakymus nustatyta unikali patirtis – vienkartinė
+rytietiškos degustacinės vakarienės patirtis Lietuvoje,
+su netikėtais skoniais ir kulinariniu šou.
 </p>
 
-<div class="row">
-<a class="biglink" href="tickets-6a342e9b334140.49859372.pdf" target="_blank">
+<p><b>Ar ši dovana atitinka Jūsų norus?</b></p>
+
+<div class="controls">
+<button class="btn yes" onclick="openFinal()">TAIP</button>
+<button class="btn no no-run" id="noFinal">NE</button>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- FINAL MODAL -->
+<div class="overlay" id="overlay">
+<div class="modal">
+<h2>✨ Taip ir manėme!</h2>
+<p>
+Testas padėjo parinkti Jums tinkamiausią dovaną – egzotinę vakarienę.
+</p>
+
+<a class="btn yes" href="tickets-6a342e9b334140.49859372.pdf" target="_blank">
 🎫 Atsisiųsti bilietus
 </a>
 
-<button class="btn ghost" id="letterBtn">
-🌷 Perskaityti sveikinimą
-</button>
-
-<button class="btn ghost" id="closeBtn">
-Uždaryti
-</button>
-</div>
-
-<p style="margin-top:18px">
-Tikroji dovana – spektaklis „Figaro vedybos“.
-</p>
-
-</div>
-</div>
-
-<div class="overlay" id="letterOverlay">
-<div class="modal">
-<h2>🌷 Su gimtadieniu, Dalyte</h2>
-
-<p style="white-space:pre-line;color:#333">
-Miela Dalyte, gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.
-
-Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami. Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.
-
-Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją, įkvepiančias patirtis ir kuo daugiau laiko tam, kas iš tiesų teikia džiaugsmą. Tegul net ir kasdienybės skubėjime nepritrūksta progų sustoti, pasimėgauti akimirka ir pasijusti laiminga.
-
-O šiai progai dovanoju Jums vakarą su kūriniu, kuriame netrūksta gyvenimo išminties, humoro, netikėtumų ir muzikos grožio. Tikiuosi, kad tos kelios valandos bus mažas pabėgimas nuo darbų, kupinas gerų emocijų, įspūdžių ir įkvėpimo.
-
-Su nuoširdžiausiais linkėjimais ir dėkingumu už mūsų bendrą kelią –
-
-Neringa 🌷
-</p>
-
-<button class="btn ghost" id="closeLetter">Uždaryti</button>
 </div>
 </div>
 
 <script>
-const stage=document.getElementById("stage");
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const overlay=document.getElementById("overlay");
-const closeBtn=document.getElementById("closeBtn");
-const statusHint=document.getElementById("statusHint");
 
-function moveNoButton(){
-const s=stage.getBoundingClientRect();
-const b=noBtn.getBoundingClientRect();
-const x=Math.random()*(s.width-b.width-20);
-const y=Math.random()*(s.height-b.height-20);
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
+let step=0;
+const wrapper=document.getElementById("wrapper");
+const scenes=document.querySelectorAll(".scene");
+const bar=document.getElementById("bar");
+
+function update(){
+wrapper.style.transform=`translateX(-${step*100}vw)`;
+
+scenes.forEach((s,i)=>{
+s.classList.toggle("active",i===step);
+});
+
+bar.style.width=(step/(scenes.length-1))*100+"%";
 }
 
-noBtn.addEventListener("mouseenter",()=>{
-statusHint.textContent="Oi! Nepavyko 😄";
-moveNoButton();
-});
-
-noBtn.addEventListener("touchstart",(e)=>{
-e.preventDefault();
-moveNoButton();
-},{passive:false});
-
-noBtn.addEventListener("click",()=>moveNoButton());
-
-yesBtn.addEventListener("click",()=>{
-overlay.style.display="grid";
-popConfetti();
-});
-
-closeBtn.addEventListener("click",()=>{
-overlay.style.display="none";
-});
-
-const letterBtn=document.getElementById("letterBtn");
-const letterOverlay=document.getElementById("letterOverlay");
-const closeLetter=document.getElementById("closeLetter");
-
-letterBtn.addEventListener("click",()=>{
-letterOverlay.style.display="grid";
-});
-
-closeLetter.addEventListener("click",()=>{
-letterOverlay.style.display="none";
-});
-
-function popConfetti(){
-const confetti=document.getElementById("confetti");
-confetti.innerHTML="";
-for(let i=0;i<40;i++){
-const el=document.createElement("i");
-el.style.left=Math.random()*100+"%";
-el.style.background=`hsl(${Math.random()*360} 85% 60%)`;
-confetti.appendChild(el);
+function next(){
+if(step<scenes.length-1){
+step++;
+update();
 }
-setTimeout(()=>confetti.innerHTML="",1800);
 }
-moveNoButton();
+
+/* FINAL overlay */
+function openFinal(){
+document.getElementById("overlay").style.display="grid";
+}
+
+/* runaway ONLY final NO */
+const noFinal=document.getElementById("noFinal");
+
+noFinal.addEventListener("mouseenter",()=>{
+noFinal.style.position="fixed";
+noFinal.style.left=Math.random()*80+"vw";
+noFinal.style.top=Math.random()*80+"vh";
+});
+
+/* init */
+update();
+
 </script>
+
 </body>
 </html>
