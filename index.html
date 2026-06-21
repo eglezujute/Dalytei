@@ -101,7 +101,7 @@ padding:12px;
 margin-top:10px;
 border-radius:12px;
 border:1px solid #333;
-background:#0f172a;
+background:#eb7800;
 color:#fff;
 }
 
@@ -115,7 +115,7 @@ background:rgba(0,0,0,.75);
 }
 
 .modal{
-background:#111827;
+background:#eb7800;
 padding:26px;
 border-radius:20px;
 width:min(700px,92vw);
@@ -265,7 +265,14 @@ function restart(){
 step=0;
 update();
 document.getElementById("overlay").style.display="none";
+
+/* reset NO button */
 noFinal.style.position="relative";
+noFinal.style.left="";
+noFinal.style.top="";
+
+/* force reflow (svarbu kai kuriems browseriams) */
+noFinal.offsetHeight;
 }
 
 update();
