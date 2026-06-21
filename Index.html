@@ -1,345 +1,232 @@
 <!doctype html>
 <html lang="lt">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mamai 💝</title>
-  <style>
-    :root{
-      --bg1:#fff7fb;
-      --bg2:#f2f6ff;
-      --card:#ffffffcc;
-      --text:#1f2330;
-      --muted:#5b6275;
-      --yes:#22c55e;
-      --no:#ef4444;
-      --shadow: 0 18px 45px rgba(31,35,48,.12);
-      --radius: 22px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      background:
-        radial-gradient(1000px 700px at 20% 10%, var(--bg1), transparent 60%),
-        radial-gradient(900px 650px at 85% 30%, var(--bg2), transparent 60%),
-        linear-gradient(180deg, #ffffff, #f8fafc);
-      overflow:auto;
-    }
-    .wrap{
-      width:min(820px, 92vw);
-      padding:24px;
-    }
-    .card{
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(31,35,48,.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px;
-      position:relative;
-max-height: calc(100vh - 48px);
-overflow: auto;
-    }
-    h1{
-      margin:12px 0 10px;
-      font-size: clamp(18px, 2.6vw, 26px);
-      letter-spacing:-0.02em;
-      line-height: 1.35;
-      white-space: pre-line;
-    }
-    p{
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height:1.5;
-      font-size: 16px;
-    }
-    .stage{
-      margin-top: 18px;
-      height: 240px;
-      border-radius: 18px;
-      border: 1px dashed rgba(31,35,48,.14);
-      background: rgba(255,255,255,.55);
-      position: relative;
-      overflow:hidden;
-    }
-    .btn{
-      border:0;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-weight: 700;
-      cursor:pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      transition: transform .08s ease, filter .12s ease;
-      user-select:none;
-      touch-action: manipulation;
-      font-size: 16px;
-    }
-    .btn:active{ transform: translateY(1px) scale(.99); }
-    .yes{
-      background: var(--yes);
-      color: white;
-    }
-    .no{
-      background: var(--no);
-      color: white;
-      position:absolute;
-      left: 56%;
-      top: 56%;
-    }
-    .controls{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:14px;
-      align-items:center;
-    }
-    .hint{
-      font-size: 13px;
-      color: rgba(91,98,117,.95);
-      margin-top: 10px;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(31,35,48,.10);
-      background: rgba(255,255,255,.65);
-      font-size: 13px;
-      color: rgba(91,98,117,.95);
-    }
-
-    /* Success modal */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background: rgba(10,12,18,.35);
-      display:none;
-      place-items:center;
-      padding: 20px;
-    }
-    .modal{
-      width:min(560px, 94vw);
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.25);
-      padding: 26px;
-      border: 1px solid rgba(0,0,0,.08);
-      position:relative;
-      overflow:hidden;
-    }
-    .modal h2{
-      margin:0 0 8px;
-      font-size: 22px;
-    }
-    .modal p{ margin:0 0 18px; }
-    .row{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    a.biglink{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-      padding: 14px 18px;
-      border-radius: 16px;
-      background: #111827;
-      color:white;
-      font-weight: 800;
-      box-shadow: 0 12px 24px rgba(17,24,39,.20);
-    }
-    .ghost{
-      background: transparent;
-      border: 1px solid rgba(17,24,39,.18);
-      color: #111827;
-      box-shadow:none;
-    }
-
-    /* Confetti */
-    .confetti{
-      position:absolute;
-      inset:-20px;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .confetti i{
-      position:absolute;
-      width:10px;height:14px;
-      opacity:.9;
-      transform: translateY(-60px) rotate(0deg);
-      animation: fall 1200ms linear forwards;
-      border-radius: 3px;
-    }
-    @keyframes fall{
-      to { transform: translateY(520px) rotate(360deg); opacity: 1; }
-    }
-
-    footer{
-      margin-top: 14px;
-      text-align:center;
-      font-size: 12px;
-      color: rgba(91,98,117,.8);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Su gimtadieniu, Dalyte! 🌷</title>
+<style>
+:root{
+--bg1:#fff7fb;--bg2:#f2f6ff;--card:#ffffffcc;--text:#1f2330;--muted:#5b6275;
+--yes:#22c55e;--no:#ef4444;--shadow:0 18px 45px rgba(31,35,48,.12);--radius:22px;
+}
+*{box-sizing:border-box}
+body{
+margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+color:var(--text);min-height:100vh;display:grid;place-items:center;
+background:
+radial-gradient(1000px 700px at 20% 10%, var(--bg1), transparent 60%),
+radial-gradient(900px 650px at 85% 30%, var(--bg2), transparent 60%),
+linear-gradient(180deg,#ffffff,#f8fafc);
+}
+.wrap{width:min(820px,92vw);padding:24px}
+.card{
+background:var(--card);backdrop-filter:blur(10px);
+border:1px solid rgba(31,35,48,.08);border-radius:var(--radius);
+box-shadow:var(--shadow);padding:28px;
+}
+h1{white-space:pre-line;line-height:1.4}
+p{color:var(--muted);line-height:1.6}
+.stage{
+margin-top:18px;height:240px;border-radius:18px;
+border:1px dashed rgba(31,35,48,.14);background:rgba(255,255,255,.55);
+position:relative;overflow:hidden;
+}
+.btn{
+border:0;padding:14px 18px;border-radius:16px;font-weight:700;
+cursor:pointer;font-size:16px;
+}
+.yes{background:var(--yes);color:#fff}
+.no{background:var(--no);color:#fff;position:absolute;left:56%;top:56%}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hint{font-size:13px}
+.chip{
+display:inline-flex;padding:8px 12px;border-radius:999px;
+border:1px solid rgba(31,35,48,.10);background:rgba(255,255,255,.65);
+font-size:13px;
+}
+.overlay{
+position:fixed;inset:0;background:rgba(10,12,18,.35);
+display:none;place-items:center;padding:20px;
+}
+.modal{
+width:min(700px,95vw);max-height:90vh;overflow:auto;
+background:#fff;border-radius:24px;padding:26px;
+}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.biglink{
+display:inline-flex;text-decoration:none;padding:14px 18px;
+border-radius:16px;background:#111827;color:white;font-weight:800;
+}
+.ghost{border:1px solid rgba(17,24,39,.18);background:white}
+.confetti{position:absolute;inset:-20px;pointer-events:none}
+.confetti i{
+position:absolute;width:10px;height:14px;border-radius:3px;
+animation:fall 1200ms linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(520px) rotate(360deg)}
+}
+footer{margin-top:14px;text-align:center;font-size:12px}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
+<div class="wrap">
+<div class="card">
 
-      <div class="chip" id="chipText">Mama, šiandien Tavo diena! 💝</div>
+<div class="chip">🌷 Miela Dalyte, šiandien Jūsų diena!</div>
 
-      <h1 id="title">
-Mes ilgai galvojome, kas galėtų būti verta Tavęs.
+<h1>
+Mes ilgai galvojome, kokia dovana galėtų būti verta Jūsų.
 
-Kažkas elegantiško. Patikimo. Ilgaamžio.
+Kažkas išskirtinio.
+Kažkas, ko kasdien nepatirsi.
+Kažkas, apie ką dar ilgai pasakosite kolegoms.
 
-Sidabrinės spalvos. Blizgantis. Stilingas.
-Puikiai subalansuotas kasdieniam naudojimui.
+Tik vienam vakarui į Lietuvą atvykstanti
+egzotinių gyvių degustacinė vakarienė.
 
-Pakankamai erdvus, kad sutalpintų viską, ko reikia.
-Pakankamai kompaktiškas, kad idealiai įsilietų į mūsų aplinką.
+Unikalūs skoniai.
+Netikėti ingredientai.
+Judantys eksponatai.
 
-Pagamintas iš aukštos kokybės medžiagų.
-Nepriekaištingai veikiantis. Išskirtinis.
+Kai kurie vakarienės dalyviai dar prieš kelias valandas buvo visiškai gyvi.
 
-Su gera komplektacija ir keliais greičiais varomas.
-Sukurtas tam, kad tarnautų Tau daugelį metų.
+🦂 🦗 🐛
 
-Mes žinome, kad Tu seniai apie tai svajojai...
+Ar priimsite šią nepamirštamą dovaną?
+</h1>
 
-Naujutėlaitį...
+<p id="subtitle">
+„NE“ mygtukas sužinojo vakarienės meniu ir dabar paniškai bando išsigelbėti 😄
+</p>
 
-Puodų rinkinį. 🥘✨
+<div class="controls">
+<button class="btn yes" id="yesBtn">TAIP</button>
+<span class="hint" id="statusHint">O gal vis dėlto NE? 🤔</span>
+</div>
 
-Ar priimsi šią įspūdingą mūsų dovaną?
-      </h1>
+<div class="stage" id="stage">
+<button class="btn no" id="noBtn">NE</button>
+</div>
 
-      <p id="subtitle">
-        „NE“ mygtukas patyrė emocinį šoką sužinojęs, kokia tai dovana, ir dabar elgiasi neprognozuojamai 🤪
-      </p>
+<footer>Su nuoširdžiausiais linkėjimais 🌷</footer>
 
-      <div class="controls">
-        <button class="btn yes" id="yesBtn">TAIP</button>
-        <span class="hint" id="statusHint">Ar vis dėlto NE? 🤔</span>
-      </div>
+</div>
+</div>
 
-      <div class="stage" id="stage" aria-label="mygtukų zona">
-        <button class="btn no" id="noBtn" aria-label="ne">NE</button>
-      </div>
+<div class="overlay" id="overlay">
+<div class="modal">
+<div class="confetti" id="confetti"></div>
+<h2>🎉 Pasirodo, egzotinių gyvių vakarienės šiandien išvengėte!</h2>
+<p>
+Tikroji dovana laukia žemiau. Linkime gražaus vakaro ir daug įspūdžių!
+</p>
 
-      <footer>Su begaline meile, Tavo šeimynėlė ✨</footer>
-    </div>
-  </div>
+<div class="row">
+<a class="biglink" href="tickets-6a342e9b334140.49859372.pdf" target="_blank">
+🎫 Atsisiųsti bilietus
+</a>
 
-  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="confetti" id="confetti"></div>
-      <h2 id="successTitle">Jėėė! 🎉</h2>
-      <p id="successText">
-        Taip ir galvojome, kad puodų rinkinys buvo kaip tik tai, apie ką svajojai 💝
-Peržiūrėk instrukcijas, kaip teisingai prižiūrėti puodų rinkinį 🫧
-      </p>
-      <div class="row">
-        <a class="biglink" id="couponLink" href="Dovana_mylimiausiai.pdf">
-          Atidaryti instrukcijas
-        </a>
-        <button class="btn ghost" id="closeBtn">Uždaryti</button>
-      </div>
-    </div>
-  </div>
+<button class="btn ghost" id="letterBtn">
+🌷 Perskaityti sveikinimą
+</button>
 
-  <script>
-    // ====== PAKEISK ŠITĄ NUORODĄ Į SAVO KUPONĄ ======
-    // Įdėk čia savo kupono PDF / Google Drive / Dropbox / bet kokią https nuorodą:
-    const COUPON_URL = "https://drive.google.com/file/d/12FiXzwcWqYzIMj3uceZXqaOEHcBYUTro/view?usp=sharing";
+<button class="btn ghost" id="closeBtn">
+Uždaryti
+</button>
+</div>
 
-    // ====== LOGIKA ======
-    const stage = document.getElementById("stage");
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const statusHint = document.getElementById("statusHint");
-    const overlay = document.getElementById("overlay");
-    const closeBtn = document.getElementById("closeBtn");
-    const couponLink = document.getElementById("couponLink");
-    const confetti = document.getElementById("confetti");
+<p style="margin-top:18px">
+Tikroji dovana – spektaklis „Figaro vedybos“.
+</p>
 
-    couponLink.href = COUPON_URL;
+</div>
+</div>
 
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+<div class="overlay" id="letterOverlay">
+<div class="modal">
+<h2>🌷 Su gimtadieniu, Dalyte</h2>
 
-    function moveNoButton(){
-      const stageRect = stage.getBoundingClientRect();
-      const btnRect = noBtn.getBoundingClientRect();
+<p style="white-space:pre-line;color:#333">
+Miela Dalyte, gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.
 
-      const padding = 12;
-      const maxX = stageRect.width - btnRect.width - padding;
-      const maxY = stageRect.height - btnRect.height - padding;
+Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami. Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.
 
-      const x = Math.random() * maxX + padding/2;
-      const y = Math.random() * maxY + padding/2;
+Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją, įkvepiančias patirtis ir kuo daugiau laiko tam, kas iš tiesų teikia džiaugsmą. Tegul net ir kasdienybės skubėjime nepritrūksta progų sustoti, pasimėgauti akimirka ir pasijusti laiminga.
 
-      noBtn.style.left = `${clamp(x, padding/2, maxX)}px`;
-      noBtn.style.top  = `${clamp(y, padding/2, maxY)}px`;
-    }
+O šiai progai dovanoju Jums vakarą su kūriniu, kuriame netrūksta gyvenimo išminties, humoro, netikėtumų ir muzikos grožio. Tikiuosi, kad tos kelios valandos bus mažas pabėgimas nuo darbų, kupinas gerų emocijų, įspūdžių ir įkvėpimo.
 
-    // Bėga nuo pelės (desktop)
-    noBtn.addEventListener("mouseenter", () => {
-      statusHint.textContent = "Oi! 😄";
-      moveNoButton();
-    });
+Su nuoširdžiausiais linkėjimais ir dėkingumu už mūsų bendrą kelią –
 
-    // Bėga nuo prisilietimo (telefonas)
-    noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      statusHint.textContent = "Net ir telefone nepagaunamas 😄";
-      moveNoButton();
-    }, {passive:false});
+Neringa 🌷
+</p>
 
-    // Jei kažkaip paspaudė "NE"
-    noBtn.addEventListener("click", () => {
-      statusHint.textContent = "Pagarba! Bet… vis tiek spaudžiam TAIP 😉";
-      moveNoButton();
-    });
+<button class="btn ghost" id="closeLetter">Uždaryti</button>
+</div>
+</div>
 
-    function popConfetti(){
-      confetti.innerHTML = "";
-      const pieces = 40;
-      for(let i=0;i<pieces;i++){
-        const el = document.createElement("i");
-        const left = Math.random()*100;
-        const delay = Math.random()*250;
-        const size = 8 + Math.random()*10;
-        el.style.left = left + "%";
-        el.style.animationDelay = delay + "ms";
-        el.style.width = size + "px";
-        el.style.height = (size*1.2) + "px";
-        el.style.background = `hsl(${Math.random()*360} 85% 60%)`;
-        confetti.appendChild(el);
-      }
-      setTimeout(()=> confetti.innerHTML="", 1800);
-    }
+<script>
+const stage=document.getElementById("stage");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const overlay=document.getElementById("overlay");
+const closeBtn=document.getElementById("closeBtn");
+const statusHint=document.getElementById("statusHint");
 
-    yesBtn.addEventListener("click", () => {
-      overlay.style.display = "grid";
-      popConfetti();
-    });
+function moveNoButton(){
+const s=stage.getBoundingClientRect();
+const b=noBtn.getBoundingClientRect();
+const x=Math.random()*(s.width-b.width-20);
+const y=Math.random()*(s.height-b.height-20);
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+}
 
-    closeBtn.addEventListener("click", () => {
-      overlay.style.display = "none";
-      statusHint.textContent = "Ar vis dėlto „NE“? 😄";
-    });
+noBtn.addEventListener("mouseenter",()=>{
+statusHint.textContent="Oi! Nepavyko 😄";
+moveNoButton();
+});
 
-    // Start position
-    moveNoButton();
-  </script>
+noBtn.addEventListener("touchstart",(e)=>{
+e.preventDefault();
+moveNoButton();
+},{passive:false});
+
+noBtn.addEventListener("click",()=>moveNoButton());
+
+yesBtn.addEventListener("click",()=>{
+overlay.style.display="grid";
+popConfetti();
+});
+
+closeBtn.addEventListener("click",()=>{
+overlay.style.display="none";
+});
+
+const letterBtn=document.getElementById("letterBtn");
+const letterOverlay=document.getElementById("letterOverlay");
+const closeLetter=document.getElementById("closeLetter");
+
+letterBtn.addEventListener("click",()=>{
+letterOverlay.style.display="grid";
+});
+
+closeLetter.addEventListener("click",()=>{
+letterOverlay.style.display="none";
+});
+
+function popConfetti(){
+const confetti=document.getElementById("confetti");
+confetti.innerHTML="";
+for(let i=0;i<40;i++){
+const el=document.createElement("i");
+el.style.left=Math.random()*100+"%";
+el.style.background=`hsl(${Math.random()*360} 85% 60%)`;
+confetti.appendChild(el);
+}
+setTimeout(()=>confetti.innerHTML="",1800);
+}
+moveNoButton();
+</script>
 </body>
 </html>
