@@ -9,7 +9,7 @@
 :root{
 --bg:#ffc37c;
 --card:rgba(255, 159, 78, 0.95);
---text:#909090;
+--text:#3c3e43;
 --muted:#ffffff;
 --yes:#22c55e;
 --no:#ef4444;
@@ -35,6 +35,7 @@ position:fixed;
 top:0;left:0;right:0;
 height:4px;
 background:#1f2937;
+z-index:1000;
 }
 .bar{
 height:100%;
@@ -65,7 +66,7 @@ box-shadow:0 40px 120px rgba(0,0,0,.6);
 text-align:center;
 }
 
-/* buttons layout FIX */
+/* buttons */
 .controls{
 display:flex;
 gap:12px;
@@ -76,7 +77,6 @@ flex-wrap:wrap;
 position:relative;
 }
 
-/* buttons */
 .btn{
 border:0;
 padding:14px 18px;
@@ -89,9 +89,9 @@ min-width:120px;
 .yes{background:var(--yes);color:#fff}
 .no{background:var(--no);color:#fff}
 
-/* FINAL runaway NO */
+/* runaway NO */
 .no-run{
-position:relative; /* START normaliai šalia */
+position:relative;
 }
 
 /* input */
@@ -105,25 +105,15 @@ background:#bfb7a8;
 color:#fff;
 }
 
+/* intro */
 .intro-text{
-font-size:18px;              /* didesnis tekstas */
-line-height:1.9;
-color:#909090;
-
-/* 💡 ABIPUSĖ LYGIUOTĖ */
+font-size:20px;
+line-height:1.6;
+color:#3c3e43;
 text-align:justify;
-
-/* kad paskutinė eilutė nebūtų ištempta */
-text-justify:inter-word;
-
-/* scroll efektas */
 max-height:60vh;
 overflow-y:auto;
 padding-right:12px;
-
-/* gražesnė skaitymo zona */
-scrollbar-width:thin;
-scrollbar-color:#22c55e rgba(0,0,0,0.2);
 }
 
 /* overlay */
@@ -133,6 +123,7 @@ inset:0;
 display:none;
 place-items:center;
 background:rgba(0,0,0,.75);
+z-index:2000;
 }
 
 .modal{
@@ -143,6 +134,7 @@ width:min(700px,92vw);
 text-align:center;
 }
 
+/* loader */
 .loader{
 margin:20px auto;
 width:50px;
@@ -150,13 +142,12 @@ height:50px;
 border:4px solid #2a2f3a;
 border-top:4px solid #22c55e;
 border-radius:50%;
-animation:spin 1s linear;
+animation:spin 1s linear infinite;
 }
 
 @keyframes spin{
 to{transform:rotate(360deg)}
 }
-
 </style>
 </head>
 
@@ -167,17 +158,15 @@ to{transform:rotate(360deg)}
 <!-- 0 -->
 <div class="scene active">
 <div class="card">
-<h1>
-Miela Dalyte,
-</h1>
+<h1>Miela Dalyte,</h1>
 <div class="intro-text">
 gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
 
-Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami. Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
+Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami.<br><br>
 
-Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją, įkvepiančias patirtis ir kuo daugiau laiko tam, kas iš tiesų teikia džiaugsmą. Tegul net ir kasdienybės skubėjime nepritrūksta progų sustoti, pasimėgauti akimirka ir pasijusti laiminga.<br><br>
+Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją.<br><br>
 
-O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums tinkamą dovaną pagal Jūsų asmenybės tipą 🌷
+O šiai progai – testas 🌷
 </div>
 
 <div class="controls">
@@ -191,9 +180,9 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <div class="card">
 <h1>Kaip dažniausiai leidžiate laisvalaikį?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Aktyviai – renginiai, kelionės, naujos vietos</button>
-<button class="btn yes" onclick="next()">Ramiai – knyga, filmai, namų aplinka</button>
-<button class="btn yes" onclick="next()">Mišriai – priklauso nuo nuotaikos</button>
+<button class="btn yes" onclick="next()">Aktyviai – renginiai, kelionės</button>
+<button class="btn yes" onclick="next()">Ramiai – knyga, filmai</button>
+<button class="btn yes" onclick="next()">Mišriai</button>
 </div>
 </div>
 </div>
@@ -204,8 +193,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <h1>Kas Jums svarbiausia patirtyse?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Nauji įspūdžiai</button>
-<button class="btn yes" onclick="next()">Ramybė, kokybė, estetika</button>
-<button class="btn yes" onclick="next()">Netikėtumo faktorius</button>
+<button class="btn yes" onclick="next()">Ramybė</button>
+<button class="btn yes" onclick="next()">Netikėtumas</button>
 </div>
 </div>
 </div>
@@ -215,8 +204,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <div class="card">
 <h1>Kaip priimate sprendimus?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Greitai, kliaujuosi intuicija</button>
-<button class="btn yes" onclick="next()">Analizuoju logiškai</button>
+<button class="btn yes" onclick="next()">Greitai</button>
+<button class="btn yes" onclick="next()">Logiškai</button>
 </div>
 </div>
 </div>
@@ -227,8 +216,8 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <h1>Kaip reaguojate į staigmenas?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Labai patinka</button>
-<button class="btn yes" onclick="next()">Patinka, jei gerai apgalvotos</button>
-<button class="btn yes" onclick="next()">Staigmenos ne man</button>
+<button class="btn yes" onclick="next()">Kartais</button>
+<button class="btn yes" onclick="next()">Ne patinka</button>
 </div>
 </div>
 </div>
@@ -236,11 +225,11 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 5 -->
 <div class="scene">
 <div class="card">
-<h1>Ar mėgstate išbandyti naujus skonius?</h1>
+<h1>Ar mėgstate naujus skonius?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Taip, VISADA</button>
+<button class="btn yes" onclick="next()">Taip</button>
 <button class="btn yes" onclick="next()">Kartais</button>
-<button class="btn yes" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
+<button class="btn yes" onclick="next()">Ne</button>
 </div>
 </div>
 </div>
@@ -248,93 +237,71 @@ O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums
 <!-- 6 -->
 <div class="scene">
 <div class="card">
-<h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
+<h1>Ar svarbi pateikimo estetika?</h1>
 <div class="controls">
-<button class="btn yes" onclick="next()">Labai svarbu</button>
+<button class="btn yes" onclick="next()">Labai</button>
 <button class="btn yes" onclick="next()">Ne visada</button>
-<button class="btn yes" onclick="next()">Gali būti pateikiama bet kaip</button>
+<button class="btn yes" onclick="next()">Nesvarbu</button>
 </div>
 </div>
 </div>
 
-<!-- 7 -->
+<!-- 7 (DATE) -->
 <div class="scene">
 <div class="card">
-<h1>Pasirinkite datą, kai galėsite skirti pora valandų dovanai atsiimti 📅</h1>
+<h1>Pasirinkite datą 📅</h1>
+
 <input type="date">
 <input type="time">
+
 <div class="controls">
 <button class="btn yes" onclick="next()">Tęsti</button>
 </div>
 </div>
 </div>
 
-<!-- 8 -->
-<div class="scene">
-<div class="card">
-<h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)?</h1>
-<div class="controls">
-<button class="btn yes" onclick="next()">Labai svarbu</button>
-<button class="btn yes" onclick="next()">Ne visada</button>
-<button class="btn yes" onclick="next()">Gali būti pateikiama bet kaip</button>
-</div>
-</div>
-</div>
-
-<!-- LOADING -->
-<div class="scene" id="loadingScene">
-<div class="card">
-<h1>🔍 Tikrinami Jūsų rezultatai</h1>
-<p>Tikrinami atsakymai ir ieškoma geriausia dovana...</p>
-
+<!-- LOADING (NE scene step logikoje) -->
+<div class="overlay" id="loadingOverlay">
+<div class="modal">
+<h1>🔍 Tikrinami atsakymai...</h1>
 <div class="loader"></div>
 </div>
 </div>
 
-<!-- 5 FINAL -->
+<!-- FINAL -->
 <div class="scene">
 <div class="card">
 <h1>🎉 Jūsų dovana parinkta</h1>
-
-<p>Egzotinė degustacinė vakarienė su kulinariniu šou.</p>
-
-<p><b>Ar tai atitinka Jūsų norus?</b></p>
+<p>Egzotinė degustacinė vakarienė</p>
 
 <div class="controls">
 <button class="btn yes" onclick="openFinal()">TAIP</button>
 <button class="btn no no-run" id="noFinal">NE</button>
 </div>
-
 </div>
 </div>
 
-<!-- FINAL -->
+<!-- RESULT -->
 <div class="overlay" id="overlay">
 <div class="modal">
 <h2>✨ Taip ir manėme!</h2>
 
-<p>Dovana parinkta tiksliai pagal Jūsų profilį.</p>
-
 <a class="btn yes"
 href="tickets-6a342e9b334140.49859372.pdf"
-target="_blank">
-🎫 Atsisiųsti bilietus
-</a>
+target="_blank">🎫 Bilietai</a>
 
 <br><br>
 
-<button class="btn no" onclick="restart()">
-🔁 Kartoti testą
-</button>
-
+<button class="btn no" onclick="restart()">Kartoti testą</button>
 </div>
 </div>
 
 <script>
-  
+
 let step = 0;
 const scenes = document.querySelectorAll(".scene");
 const bar = document.getElementById("bar");
+const loadingOverlay = document.getElementById("loadingOverlay");
 
 function update(){
 scenes.forEach((s,i)=>{
@@ -346,8 +313,8 @@ bar.style.width = (step / (scenes.length - 1)) * 100 + "%";
 
 function next(){
 
-// loading trigger
-if(step === 4){
+// DATE -> LOADING
+if(step === 6){
 showLoading();
 return;
 }
@@ -358,28 +325,15 @@ update();
 }
 }
 
-function openFinalStep(){
-scenes.forEach(s => s.classList.remove("active"));
-
-const finalScene = scenes[scenes.length - 1];
-finalScene.classList.add("active");
-
-bar.style.width = "100%";
-}
-
 function showLoading(){
-const loading = document.getElementById("loadingScene");
 
-scenes.forEach(s => s.classList.remove("active"));
-loading.classList.add("active");
+loadingOverlay.style.display = "grid";
 
-/* reset progress optional */
-bar.style.width = "85%";
-
-/* po 5s keliaujam į final */
 setTimeout(()=>{
-openFinalStep();
-}, 5000);
+loadingOverlay.style.display = "none";
+step = 7;
+update();
+}, 3000);
 }
 
 function openFinal(){
@@ -398,10 +352,6 @@ function restart(){
 step = 0;
 update();
 document.getElementById("overlay").style.display = "none";
-
-noFinal.style.position = "relative";
-noFinal.style.left = "";
-noFinal.style.top = "";
 }
 
 update();
