@@ -8,7 +8,7 @@
 <style>
 :root{
 --bg:#0b0f1a;
---card:rgba(17,24,39,.85);
+--card:rgba(17,24,39,.9);
 --text:#fff;
 --muted:#a1a1aa;
 --yes:#22c55e;
@@ -21,8 +21,8 @@ body{
 margin:0;
 font-family:system-ui;
 background:var(--bg);
-overflow:hidden;
 color:var(--text);
+overflow:hidden;
 }
 
 /* PROGRESS */
@@ -31,71 +31,50 @@ position:fixed;
 top:0;left:0;right:0;
 height:4px;
 background:#1f2937;
-z-index:10;
 }
 .bar{
 height:100%;
 width:0%;
 background:linear-gradient(90deg,#22c55e,#3b82f6);
-transition:.5s;
+transition:.4s;
 }
 
-/* WRAPPER */
-.wrapper{
-display:flex;
-width:500vw;
-height:100vh;
-transition:transform .9s cubic-bezier(.77,0,.18,1);
-will-change:transform;
-}
-
-/* SCENE */
+/* STEP SYSTEM (NO SLIDER) */
 .scene{
-width:100vw;
-height:100vh;
+position:absolute;
+inset:0;
 display:flex;
 align-items:center;
 justify-content:center;
 padding:40px;
 
-opacity:.6;
-filter:blur(6px);
-transform:scale(.98);
-transition:.8s;
+opacity:0;
+transform:scale(0.98);
+pointer-events:none;
+
+transition: .5s ease;
 }
 
 .scene.active{
 opacity:1;
-filter:blur(0);
 transform:scale(1);
+pointer-events:auto;
 }
 
-/* 🔥 FIX: stabilus centras */
+/* CENTER FIX */
 .inner{
 width:100%;
 max-width:760px;
-margin:auto;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
 text-align:center;
 }
 
 /* CARD */
 .card{
-width:100%;
 background:var(--card);
 backdrop-filter:blur(12px);
 padding:32px;
 border-radius:24px;
 box-shadow:0 40px 120px rgba(0,0,0,.6);
-animation:fade .6s ease;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
 }
 
 h1{font-size:22px;line-height:1.5}
@@ -120,12 +99,7 @@ cursor:pointer;
 }
 
 .yes{background:var(--yes);color:#fff}
-
-/* normal NO (nejudantis) */
-.no{
-background:var(--no);
-color:#fff;
-}
+.no{background:var(--no);color:#fff}
 
 /* FINAL runaway NO */
 .no-run{
@@ -169,20 +143,13 @@ width:min(700px,92vw);
 
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<div class="wrapper" id="wrapper">
-
 <!-- 0 INTRO -->
 <div class="scene active">
 <div class="inner">
 <div class="card">
 <h1>
 Miela Dalyte,<br><br>
-
-Gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas.<br><br>
-
-Esu dėkinga už Jūsų išmintį, palaikymą ir buvimą šalia.<br><br>
-
-O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
+Trumpas testas parinks Jums dovaną 🌷
 </h1>
 
 <div class="controls">
@@ -197,11 +164,10 @@ O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
 <div class="inner">
 <div class="card">
 <h1>Koks Jūs esate žmogus?</h1>
-
 <div class="controls">
 <button class="btn yes" onclick="next()">Energinga</button>
 <button class="btn yes" onclick="next()">Rami</button>
-<button class="btn yes" onclick="next()">Mėgstanti iššūkius</button>
+<button class="btn yes" onclick="next()">Iššūkių mėgėja</button>
 </div>
 </div>
 </div>
@@ -211,8 +177,7 @@ O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
 <div class="scene">
 <div class="inner">
 <div class="card">
-<h1>Kas Jums svarbiau?</h1>
-
+<h1>Kas Jums svarbiausia?</h1>
 <div class="controls">
 <button class="btn yes" onclick="next()">Patirtys</button>
 <button class="btn yes" onclick="next()">Ramybė</button>
@@ -243,7 +208,6 @@ O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
 <div class="inner">
 <div class="card">
 <h1>Ar mėgstate egzotinius skonius?</h1>
-
 <div class="controls">
 <button class="btn yes" onclick="next()">Taip</button>
 <button class="btn yes" onclick="next()">Kartais</button>
@@ -259,7 +223,7 @@ O dabar – trumpas testas, kuris parinks Jums dovaną 🌷
 <h1>🎉 Jūsų dovana parinkta</h1>
 
 <p>
-Pagal Jūsų atsakymus – egzotiška degustacinė vakarienė su kulinariniu šou.
+Egzotinė degustacinė vakarienė su kulinariniu šou.
 </p>
 
 <p><b>Ar tai atitinka Jūsų norus?</b></p>
@@ -273,13 +237,10 @@ Pagal Jūsų atsakymus – egzotiška degustacinė vakarienė su kulinariniu šo
 </div>
 </div>
 
-</div>
-
 <!-- FINAL -->
 <div class="overlay" id="overlay">
 <div class="modal">
 <h2>✨ Taip ir manėme!</h2>
-<p>Dovana parinkta tiksliai pagal Jūsų profilį.</p>
 
 <a class="btn yes"
 href="tickets-6a342e9b334140.49859372.pdf"
@@ -293,14 +254,10 @@ target="_blank">
 <script>
 
 let step=0;
-
-const wrapper=document.getElementById("wrapper");
 const scenes=document.querySelectorAll(".scene");
 const bar=document.getElementById("bar");
 
 function update(){
-
-wrapper.style.transform=`translateX(-${step*100}vw)`;
 
 scenes.forEach((s,i)=>{
 s.classList.toggle("active",i===step);
@@ -320,7 +277,7 @@ function openFinal(){
 document.getElementById("overlay").style.display="grid";
 }
 
-/* FINAL runaway ONLY */
+/* runaway ONLY final */
 const noFinal=document.getElementById("noFinal");
 
 noFinal.addEventListener("mouseenter",()=>{
