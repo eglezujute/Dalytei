@@ -8,9 +8,9 @@
 <style>
 :root{
 --bg:#ffc37c;
---card:rgba(254, 155, 26, 0.95);
+--card:rgba(255, 159, 78, 0.95);
 --text:#fff;
---muted:#a1a1aa;
+--muted:#ffffff;
 --yes:#22c55e;
 --no:#ef4444;
 }
@@ -24,14 +24,12 @@ background:var(--bg);
 color:var(--text);
 height:100vh;
 overflow:hidden;
-
-/* VISADA CENTRAS */
 display:flex;
 align-items:center;
 justify-content:center;
 }
 
-/* PROGRESS */
+/* progress */
 .progress{
 position:fixed;
 top:0;left:0;right:0;
@@ -45,7 +43,7 @@ background:linear-gradient(90deg,#22c55e,#3b82f6);
 transition:.3s;
 }
 
-/* STEP WRAPPER */
+/* scenes */
 .scene{
 display:none;
 width:100%;
@@ -57,7 +55,7 @@ align-items:center;
 display:flex;
 }
 
-/* CARD */
+/* card */
 .card{
 width:min(760px,92vw);
 background:var(--card);
@@ -65,49 +63,38 @@ padding:32px;
 border-radius:24px;
 box-shadow:0 40px 120px rgba(0,0,0,.6);
 text-align:center;
-
-/* tik čia leidžiam fade */
-animation:fade .25s ease;
 }
 
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
-
-h1{font-size:22px;line-height:1.5}
-p{color:var(--muted);line-height:1.6}
-
-/* BUTTONS */
+/* buttons layout FIX */
 .controls{
 display:flex;
 gap:12px;
 margin-top:18px;
 justify-content:center;
+align-items:center;
 flex-wrap:wrap;
 position:relative;
 }
 
+/* buttons */
 .btn{
 border:0;
 padding:14px 18px;
 border-radius:14px;
 font-weight:700;
 cursor:pointer;
+min-width:120px;
 }
 
 .yes{background:var(--yes);color:#fff}
 .no{background:var(--no);color:#fff}
 
-/* FINAL RUNAWAY */
+/* FINAL runaway NO */
 .no-run{
-position:fixed;
-left:50%;
-top:60%;
-transition:.15s;
+position:relative; /* START normaliai šalia */
 }
 
-/* INPUT FIX */
+/* input */
 input{
 width:100%;
 padding:12px;
@@ -118,7 +105,7 @@ background:#0f172a;
 color:#fff;
 }
 
-/* OVERLAY */
+/* overlay */
 .overlay{
 position:fixed;
 inset:0;
@@ -146,7 +133,6 @@ text-align:center;
 <div class="scene active">
 <div class="card">
 <h1>Miela Dalyte 🌷</h1>
-<p>Trumpas testas parinks Jums dovaną.</p>
 <div class="controls">
 <button class="btn yes" onclick="next()">Pradėti</button>
 </div>
@@ -181,10 +167,8 @@ text-align:center;
 <div class="scene">
 <div class="card">
 <h1>Pasirinkite datą 📅</h1>
-
 <input type="date">
 <input type="time">
-
 <div class="controls">
 <button class="btn yes" onclick="next()">Tęsti</button>
 </div>
@@ -195,10 +179,12 @@ text-align:center;
 <div class="scene">
 <div class="card">
 <h1>Ar mėgstate egzotinius skonius?</h1>
+
 <div class="controls">
 <button class="btn yes" onclick="next()">Taip</button>
-<button class="btn yes" onclick="next()">Kartais</button>
+<button class="btn no" onclick="next()">Ne</button>
 </div>
+
 </div>
 </div>
 
@@ -215,6 +201,7 @@ text-align:center;
 <button class="btn yes" onclick="openFinal()">TAIP</button>
 <button class="btn no no-run" id="noFinal">NE</button>
 </div>
+
 </div>
 </div>
 
@@ -223,11 +210,19 @@ text-align:center;
 <div class="modal">
 <h2>✨ Taip ir manėme!</h2>
 
+<p>Dovana parinkta tiksliai pagal Jūsų profilį.</p>
+
 <a class="btn yes"
 href="tickets-6a342e9b334140.49859372.pdf"
 target="_blank">
 🎫 Atsisiųsti bilietus
 </a>
+
+<br><br>
+
+<button class="btn no" onclick="restart()">
+🔁 Kartoti testą
+</button>
 
 </div>
 </div>
@@ -239,11 +234,9 @@ const scenes=document.querySelectorAll(".scene");
 const bar=document.getElementById("bar");
 
 function update(){
-
 scenes.forEach((s,i)=>{
 s.classList.toggle("active",i===step);
 });
-
 bar.style.width=(step/(scenes.length-1))*100+"%";
 }
 
@@ -258,7 +251,7 @@ function openFinal(){
 document.getElementById("overlay").style.display="grid";
 }
 
-/* runaway ONLY final */
+/* runaway FINAL ONLY */
 const noFinal=document.getElementById("noFinal");
 
 noFinal.addEventListener("mouseenter",()=>{
@@ -266,6 +259,14 @@ noFinal.style.position="fixed";
 noFinal.style.left=Math.random()*80+"vw";
 noFinal.style.top=Math.random()*80+"vh";
 });
+
+/* restart */
+function restart(){
+step=0;
+update();
+document.getElementById("overlay").style.display="none";
+noFinal.style.position="relative";
+}
 
 update();
 
