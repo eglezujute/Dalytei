@@ -9,7 +9,7 @@
 :root{
 --bg:#ffc37c;
 --card:rgba(255, 159, 78, 0.95);
---text:#fff;
+--text:#909090;
 --muted:#ffffff;
 --yes:#22c55e;
 --no:#ef4444;
@@ -101,14 +101,14 @@ padding:12px;
 margin-top:10px;
 border-radius:12px;
 border:1px solid #333;
-background:#e5d9c5;
+background:#bfb7a8;
 color:#fff;
 }
 
 .intro-text{
 font-size:18px;              /* didesnis tekstas */
 line-height:1.9;
-color:#e5e7eb;
+color:#909090;
 
 /* 💡 ABIPUSĖ LYGIUOTĖ */
 text-align:justify;
@@ -358,13 +358,27 @@ update();
 }
 }
 
-function showLoading(){
-step = 5;
-update();
+function openFinalStep(){
+scenes.forEach(s => s.classList.remove("active"));
 
+const finalScene = scenes[scenes.length - 1];
+finalScene.classList.add("active");
+
+bar.style.width = "100%";
+}
+
+function showLoading(){
+const loading = document.getElementById("loadingScene");
+
+scenes.forEach(s => s.classList.remove("active"));
+loading.classList.add("active");
+
+/* reset progress optional */
+bar.style.width = "85%";
+
+/* po 5s keliaujam į final */
 setTimeout(()=>{
-step = 6;
-update();
+openFinalStep();
 }, 5000);
 }
 
